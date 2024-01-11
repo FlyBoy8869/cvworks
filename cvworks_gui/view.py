@@ -1,6 +1,8 @@
+import os
 import datetime
 
 from PyQt6.QtCore import QDate, Qt
+from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QWidget, QMessageBox
 
 import schedule.schedule as schedule
@@ -8,6 +10,7 @@ from cvworks_gui.ui.calendar_ui import Ui_Form
 
 from version import VERSION
 
+BASEDIR = os.path.dirname(__file__)
 
 WORKS = {True: "WORKING", False: "OFF"}
 
@@ -22,6 +25,8 @@ OFF_STYLESHEET = (
 STYLESHEET = {True: WORKS_STYLESHEET, False: OFF_STYLESHEET}
 
 # About Dialog
+INFO_ICON = os.path.join(BASEDIR, "info.png")
+
 INFO_DIALOG_HEADING_WEIGHT = 500
 INFO_DIALOG_TEXT_SIZE = 10
 INFO_DIALOG_TEXT_FONT_WEIGHT = 300
@@ -81,9 +86,8 @@ class CalendarView(QWidget, Ui_Form):
             f"{PROGRAM_VERSION}"
         )
 
-        QMessageBox(
-            QMessageBox.Icon.Information,
-            "About CVWorks",
-            text,
-            parent=self,
-        ).exec()
+        msg_box = QMessageBox(parent=self)
+        msg_box.setIconPixmap(QPixmap(INFO_ICON))
+        msg_box.setWindowTitle("About CVWorks")
+        msg_box.setText(text)
+        msg_box.exec()
