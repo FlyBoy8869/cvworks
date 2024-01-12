@@ -1,5 +1,11 @@
+ICON_SRC = /Users/charles/PycharmProjects/cvworks/cvworks_gui/info.png
+ICON_DEST = ./cvworks_gui
+INFO_ICON = $(ICON_SRC):$(ICON_DEST)
+
+DATA_TO_INCLUDE = --add-data=$(INFO_ICON)
+
 app:
-	pyinstaller --noconfirm --windowed --name cvworks --add-data "/Users/charles/PycharmProjects/cvworks/cvworks_gui/info.png:./cvworks_gui" app.py
+	pyinstaller --noconfirm --windowed --name cvworks $(DATA_TO_INCLUDE) app.py
 
 update-version:
 	python buildscripts/buildversion.py
