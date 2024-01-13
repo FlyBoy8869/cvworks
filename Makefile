@@ -27,6 +27,6 @@ win-install:
 	IF EXIST "C:\Users\charles\cvworks" (rmdir /S /Q C:\Users\charles\cvworks)
 	mkdir C:\Users\charles\cvworks
 	xcopy .\dist\cvworks C:\Users\charles\cvworks /E /H /C /I
-	python.exe buildscripts/create_shortcut.py
+	python.exe buildscripts/create_windows_shortcut.py
 
 win-release: win-app win-install
