@@ -1,3 +1,5 @@
+"""Creates a desktop shortcut to cvworks.exe on Windows."""
+
 import os
 import winshell
 
