@@ -3,7 +3,7 @@
 import os
 import winshell
 
-target = os.path.join(winshell.desktop(common=False), "cvworks - Shortcut.lnk")
+target = os.path.join(winshell.desktop(), "cvworks - Shortcut.lnk")
 user_profile = winshell.folder("profile")
 path = os.path.join(user_profile, r"cvworks\cvworks.exe")
 working_directory = os.path.join(user_profile, "cvworks")
