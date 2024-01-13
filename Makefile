@@ -30,3 +30,9 @@ win-install:
 	python.exe buildscripts/create_windows_shortcut.py
 
 win-release: win-app win-install
+
+setup-mac:
+	python -m pip install -r requirements.txt
+
+setup-win:
+	python.exe -m pip install -r requirements-win.txt
