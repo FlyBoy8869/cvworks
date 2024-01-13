@@ -19,7 +19,7 @@ mac-release: update-version app mac-install
 windows-build:
 	pyinstaller --noconfirm --windowed $(WIN_DATA_TO_INCLUDE) --name cvworks app.py
 win-app: windows-build
-	WIN_ICON_SRC = C:/Users/charles/PycharmProjects/cvworks/cvworks_gui/info.png
+	WIN_ICON_SRC = C:\Users\charles\PycharmProjects\cvworks\cvworks_gui\info.png
 	WIN_INFO_ICON = $(WIN_ICON_SRC);$(ICON_DST)
 	WIN_DATA_TO_INCLUDE = --add-data=$(WIN_INFO_ICON)
 
