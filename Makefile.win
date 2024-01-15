@@ -1,9 +1,10 @@
-WIN_ICON_SRC = C:\Users\charles\PycharmProjects\cvworks\cvworks_gui\info.png
-WIN_INFO_ICON = $(WIN_ICON_SRC);$(ICON_DST)
-WIN_DATA_TO_INCLUDE = --add-data=$(WIN_INFO_ICON)
+ICON_SRC = C:\\Users\\charles\\PycharmProjects\\cvworks\\cvworks_gui\\info.png
+ICON_DST = .\\cvworks_gui
+INFO_ICON = $(ICON_SRC);$(ICON_DST)
+DATA_TO_INCLUDE = --add-data=$(INFO_ICON)
 
-app: windows-build
-	pyinstaller --noconfirm --windowed $(WIN_DATA_TO_INCLUDE) --name cvworks app.py
+app:
+	pyinstaller --noconfirm --windowed $(DATA_TO_INCLUDE) --name cvworks app.py
 
 install:
 	IF EXIST "C:\Users\charles\cvworks" (rmdir /S /Q C:\Users\charles\cvworks)
@@ -11,7 +12,7 @@ install:
 	xcopy .\dist\cvworks C:\Users\charles\cvworks /E /H /C /I
 	python.exe buildscripts/create_windows_shortcut.py
 
-release: win-app win-install
+release: app install
 
 setup:
 	python.exe -m pip install -r win_requirements.txt
