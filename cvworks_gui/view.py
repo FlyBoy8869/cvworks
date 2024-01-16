@@ -1,5 +1,6 @@
 import os
 import datetime
+import platform
 
 from PyQt6.QtCore import QDate, Qt
 from PyQt6.QtGui import QPixmap
@@ -43,6 +44,10 @@ AUTHOR_EMAIL = (
 VERSION_HEADING = (
     f"<p><span style='font-weight: {INFO_DIALOG_HEADING_WEIGHT};'>Version:</span><br>"
 )
+OPERATING_SYSTEM = (
+    f"<span style='font-weight: {INFO_DIALOG_TEXT_FONT_WEIGHT}; "
+    f"font-size: {INFO_DIALOG_TEXT_SIZE}px;'>{platform.platform().split('-', 1)[0]}</span><br>"
+)
 PROGRAM_VERSION = (
     f"<span style='font-weight: {INFO_DIALOG_TEXT_FONT_WEIGHT}; "
     f"font-size: {INFO_DIALOG_TEXT_SIZE}px;'>{VERSION}</span></p>"
@@ -83,6 +88,7 @@ class CalendarView(QWidget, Ui_Form):
             f"{AUTHOR_NAME}"
             f"{AUTHOR_EMAIL}"
             f"{VERSION_HEADING}"
+            f"{OPERATING_SYSTEM}"
             f"{PROGRAM_VERSION}"
         )
 
