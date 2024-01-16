@@ -9,11 +9,11 @@ app:
 update-version:
 	python buildscripts/buildversion.py
 
-mac-install:
+install:
 	# command must be structured this way
 	cp -R -f ./dist/cvworks.app /Applications
 
-mac-release: update-version app mac-install
+release: update-version app install
 
 setup-mac:
 	python -m pip install -r requirements.txt
