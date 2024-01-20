@@ -1,6 +1,6 @@
 import datetime
 
-from PyQt6.QtCore import QDate, Qt
+from PyQt6.QtCore import QDate, Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QWidget, QMessageBox
 
@@ -10,6 +10,8 @@ from cvworks_gui.styling import *
 
 
 class CalendarView(QWidget, Ui_Form):
+    signal_go_to_today = pyqtSignal()
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -18,6 +20,7 @@ class CalendarView(QWidget, Ui_Form):
         self.calendarWidget.clicked.connect(
             lambda d: self.date_clicked(self.to_python_date(d))
         )
+        self.signal_go_to_today.connect(self._go_to_today)
         self.show()
 
     def date_clicked(self, d: datetime.date):
@@ -30,12 +33,17 @@ class CalendarView(QWidget, Ui_Form):
             if event.key() == Qt.Key.Key_A:
                 self._show_about_dialog()
                 return
+            if event.key() == Qt.Key.Key_T:
+                self.signal_go_to_today.emit()
 
         event.ignore()
 
     @staticmethod
     def to_python_date(d: QDate):
         return datetime.date(d.year(), d.month(), d.day())
+
+    def _go_to_today(self):
+        self.calendarWidget.setSelectedDate(QDate.currentDate())
 
     def _show_about_dialog(self):
         text = (
