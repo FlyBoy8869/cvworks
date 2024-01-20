@@ -10,23 +10,16 @@ from cvworks_gui.styling import *
 
 
 class CalendarView(QWidget, Ui_Form):
-    signal_go_to_today = pyqtSignal()
+    show_today: pyqtSignal = pyqtSignal(QDate)
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle(f"CVWorks")
-        self.date_clicked(datetime.date.today())
-        self.calendarWidget.clicked.connect(
-            lambda d: self.date_clicked(self.to_python_date(d))
-        )
-        self.signal_go_to_today.connect(self._go_to_today)
+        self.date_clicked(QDate.currentDate())
+        self.calendarWidget.clicked.connect(self.date_clicked)
+        self.show_today.connect(self._go_to_today)
         self.show()
-
-    def date_clicked(self, d: datetime.date):
-        works = schedule.working_this_day(d)
-        self.label.setText(f"{WORKS[works]}")
-        self.label.setStyleSheet(STYLESHEET[works])
 
     def keyReleaseEvent(self, event):
         if event.modifiers() & Qt.KeyboardModifier.ControlModifier:
@@ -34,16 +27,22 @@ class CalendarView(QWidget, Ui_Form):
                 self._show_about_dialog()
                 return
             if event.key() == Qt.Key.Key_T:
-                self.signal_go_to_today.emit()
+                self.show_today.emit(QDate.currentDate())
+                return
 
         event.ignore()
 
-    @staticmethod
-    def to_python_date(d: QDate):
-        return datetime.date(d.year(), d.month(), d.day())
+    def date_clicked(self, d: QDate):
+        def to_python_date(d: QDate):
+            return datetime.date(d.year(), d.month(), d.day())
 
-    def _go_to_today(self):
-        self.calendarWidget.setSelectedDate(QDate.currentDate())
+        works = schedule.working_this_day(to_python_date(d))
+        self.label.setText(f"{WORKS[works]}")
+        self.label.setStyleSheet(STYLESHEET[works])
+
+    def _go_to_today(self, current_date: QDate):
+        self.calendarWidget.setSelectedDate(current_date)
+        self.date_clicked(current_date)
 
     def _show_about_dialog(self):
         text = (
