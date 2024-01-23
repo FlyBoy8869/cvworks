@@ -16,9 +16,8 @@ class CalendarView(QWidget, Ui_Form):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle(f"CVWorks")
-        self.date_clicked(QDate.currentDate())
-        self.calendarWidget.clicked.connect(self.date_clicked)
         self.show_today.connect(self._go_to_today)
+
         self.show()
 
     def keyReleaseEvent(self, event):
@@ -32,17 +31,8 @@ class CalendarView(QWidget, Ui_Form):
 
         event.ignore()
 
-    def date_clicked(self, d: QDate):
-        def to_python_date(d: QDate):
-            return datetime.date(d.year(), d.month(), d.day())
-
-        works = schedule.working_this_day(to_python_date(d))
-        self.label.setText(f"{WORKS[works]}")
-        self.label.setStyleSheet(STYLESHEET[works])
-
     def _go_to_today(self, current_date: QDate):
         self.calendarWidget.setSelectedDate(current_date)
-        self.date_clicked(current_date)
 
     def _show_about_dialog(self):
         text = (
