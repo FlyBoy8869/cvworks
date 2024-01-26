@@ -3,3 +3,4 @@ build
 dist
 .python-version
 cvworks.spec
+/my_scratchies/

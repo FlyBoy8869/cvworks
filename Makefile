@@ -1,7 +1,11 @@
-ICON_SRC = /Users/charles/PycharmProjects/cvworks/cvworks_gui/info.png
-ICON_DST = ./cvworks_gui
-INFO_ICON = $(ICON_SRC):$(ICON_DST)
-DATA_TO_INCLUDE = --add-data=$(INFO_ICON)
+INFO_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/info.png
+OFF_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/ui/off-64x64.png
+WORKS_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/ui/works-64x64.png
+INFO_ICON_DST = ./cvworks_gui
+OFF_ICON_DST = ./cvworks_gui/ui
+WORKS_ICON_DST = ./cvworks_gui/ui
+INFO_ICON_INCLUDE = $(INFO_ICON):$(INFO_ICON_DST)
+DATA_TO_INCLUDE = --add-data=$(INFO_ICON_INCLUDE) --add-data=$(OFF_ICON):$(OFF_ICON_DST) --add-data=$(WORKS_ICON):$(WORKS_ICON_DST)
 
 app:
 	pyinstaller --noconfirm --windowed --name cvworks $(DATA_TO_INCLUDE) app.py

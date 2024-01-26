@@ -1,12 +1,11 @@
-import datetime
-
-from PyQt6.QtCore import QDate, Qt, pyqtSignal
+from PyQt6.QtCore import QDate, Qt, pyqtSignal, QSettings, QSize, QPoint
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QWidget, QMessageBox
 
-import schedule.schedule as schedule
-from cvworks_gui.ui.calendar_ui import Ui_Form
 from cvworks_gui.styling import *
+from cvworks_gui.ui.calendar_ui import Ui_Form
+
+settings = QSettings()
 
 
 class CalendarView(QWidget, Ui_Form):
@@ -15,7 +14,11 @@ class CalendarView(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.move(settings.value("calendarView/position", QPoint(100, 100)))
+        self.resize(settings.value("calendarView/size", QSize(400, 400)))
         self.setWindowTitle(f"CVWorks")
+
+        # hook up signals
         self.show_today.connect(self._go_to_today)
 
         self.show()
@@ -30,6 +33,11 @@ class CalendarView(QWidget, Ui_Form):
                 return
 
         event.ignore()
+
+    def closeEvent(self, a0):
+        settings.setValue("calendarView/size", self.size())
+        settings.setValue("calendarView/position", self.pos())
+        super().closeEvent(a0)
 
     def _go_to_today(self, current_date: QDate):
         self.calendarWidget.setSelectedDate(current_date)

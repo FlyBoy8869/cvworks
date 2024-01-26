@@ -12,11 +12,12 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(350, 250)
+        Form.resize(400, 400)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
         self.calendarWidget = CustomCalendar(parent=Form)
         self.calendarWidget.setGridVisible(True)
+        self.calendarWidget.setSelectionMode(QtWidgets.QCalendarWidget.SelectionMode.SingleSelection)
         self.calendarWidget.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader)
         self.calendarWidget.setDateEditEnabled(False)
         self.calendarWidget.setObjectName("calendarWidget")
