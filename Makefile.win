@@ -7,7 +7,7 @@ OFF_ICON_DST = .\\cvworks_gui\\ui
 OFF_ICON_INCLUDE = $(OFF_ICON);$(OFF_ICON_DST)
 
 WORKS_ICON = $(HOME)\\PycharmProjects\\cvworks\\cvworks_gui\\ui\\works-64x64.png
-WORKS_ICON_DST = ..\\cvworks_gui\\ui
+WORKS_ICON_DST = .\\cvworks_gui\\ui
 WORKS_ICON_INCLUDE = $(WORKS_ICON);$(WORKS_ICON_DST)
 
 DATA_TO_INCLUDE = --add-data=$(INFO_ICON_INCLUDE) --add-data=$(OFF_ICON_INCLUDE) --add-data=$(WORKS_ICON_INCLUDE)
