@@ -22,6 +22,7 @@ class CalendarView(QWidget, Ui_Form):
         self.show()
 
     def closeEvent(self, a0):
+        print("hello from closeEvent")
         settings.setValue("calendarView/size", self.size())
         settings.setValue("calendarView/position", self.pos())
         super().closeEvent(a0)
