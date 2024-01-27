@@ -38,9 +38,9 @@ class CalendarView(QWidget, Ui_Form):
         event.ignore()
 
     def showEvent(self, a0):
-        super().showEvent(a0)
         self.move(settings.value("calendarView/position", QPoint(100, 100)))
         self.resize(settings.value("calendarView/size", QSize(400, 400)))
+        a0.accept()
 
     def _go_to_today(self, current_date: QDate):
         self.calendarWidget.setSelectedDate(current_date)
