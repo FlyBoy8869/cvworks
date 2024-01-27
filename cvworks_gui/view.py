@@ -14,14 +14,17 @@ class CalendarView(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.move(settings.value("calendarView/position", QPoint(100, 100)))
-        self.resize(settings.value("calendarView/size", QSize(400, 400)))
         self.setWindowTitle(f"CVWorks")
 
         # hook up signals
         self.show_today.connect(self._go_to_today)
 
         self.show()
+
+    def closeEvent(self, a0):
+        settings.setValue("calendarView/size", self.size())
+        settings.setValue("calendarView/position", self.pos())
+        super().closeEvent(a0)
 
     def keyReleaseEvent(self, event):
         if event.modifiers() & Qt.KeyboardModifier.ControlModifier:
@@ -34,10 +37,10 @@ class CalendarView(QWidget, Ui_Form):
 
         event.ignore()
 
-    def closeEvent(self, a0):
-        settings.setValue("calendarView/size", self.size())
-        settings.setValue("calendarView/position", self.pos())
-        super().closeEvent(a0)
+    def showEvent(self, a0):
+        super().showEvent(a0)
+        self.move(settings.value("calendarView/position", QPoint(100, 100)))
+        self.resize(settings.value("calendarView/size", QSize(400, 400)))
 
     def _go_to_today(self, current_date: QDate):
         self.calendarWidget.setSelectedDate(current_date)
