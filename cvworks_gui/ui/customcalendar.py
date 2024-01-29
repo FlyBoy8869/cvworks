@@ -1,4 +1,5 @@
 import datetime
+import platform
 
 from PyQt6.QtCore import QDate, Qt
 from PyQt6.QtGui import QPixmap, QPalette
@@ -17,9 +18,13 @@ class CustomCalendar(QCalendarWidget):
         super().__init__(parent)
         self._off_indicator = QPixmap(off_icon)
         self._works_indicator = QPixmap(works_icon)
-        self.date_background_color = self.palette().color(
-            QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
-        )
+
+        if platform.system() == "Windows":
+            self.date_background_color = Qt.GlobalColor.darkGray
+        else:
+            self.date_background_color = self.palette().color(
+                QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
+            )
 
     def paintCell(self, painter, rect, date: QDate):
         if date == self.selectedDate():
