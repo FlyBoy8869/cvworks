@@ -21,11 +21,10 @@ class CalendarView(QWidget, Ui_Form):
 
         self.show()
 
-    def closeEvent(self, a0):
-        print("hello from closeEvent")
+    def closeEvent(self, event):
         settings.setValue("calendarView/size", self.size())
         settings.setValue("calendarView/position", self.pos())
-        super().closeEvent(a0)
+        event.accept()
 
     def keyReleaseEvent(self, event):
         if event.modifiers() & Qt.KeyboardModifier.ControlModifier:
@@ -35,13 +34,12 @@ class CalendarView(QWidget, Ui_Form):
             if event.key() == Qt.Key.Key_T:
                 self.show_today.emit(QDate.currentDate())
                 return
-
         event.ignore()
 
-    def showEvent(self, a0):
+    def showEvent(self, event):
         self.move(settings.value("calendarView/position", QPoint(100, 100)))
         self.resize(settings.value("calendarView/size", QSize(400, 400)))
-        a0.accept()
+        event.accept()
 
     def _go_to_today(self, current_date: QDate):
         self.calendarWidget.setSelectedDate(current_date)
