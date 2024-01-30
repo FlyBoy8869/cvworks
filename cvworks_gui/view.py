@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QWidget, QMessageBox
 from cvworks_gui.styling import *
 from cvworks_gui.ui.calendar_ui import Ui_Form
 
-settings = QSettings()
+settings = QSettings("CharlesIndustries", "CVWorks")
 
 
 class CalendarView(QWidget, Ui_Form):
