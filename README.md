@@ -18,7 +18,8 @@ Bummer, It's my turn.
 ![OFF](off-screenshot.png)
 
 ![WORKS](works-screenshot.png)
-### Commands:
+
+### Keyboard Shortcuts:
 
 * CTRL-A - About<br>
 * CTRL-R - Reset screen position and dimensions<br>
