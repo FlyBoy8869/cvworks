@@ -2,12 +2,12 @@
 
 An interactive calendar indicating whether CV is working or off.
 
-![Off Image](cvworks_gui/ui/off.png)
+![Off Image](off-readme.png)
 
 Nope, I'm off today.
 
 
-![Works](cvworks_gui/ui/works.png)
+![Works](works-readme.png)
 
 Bummer, It's my turn.
 
