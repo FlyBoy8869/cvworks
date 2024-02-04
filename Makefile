@@ -1,6 +1,6 @@
 INFO_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/info.png
-OFF_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/ui/off-64x64.png
-WORKS_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/ui/works-64x64.png
+OFF_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/ui/off.png
+WORKS_ICON = /Users/charles/PycharmProjects/cvworks/cvworks_gui/ui/works.png
 INFO_ICON_DST = ./cvworks_gui
 OFF_ICON_DST = ./cvworks_gui/ui
 WORKS_ICON_DST = ./cvworks_gui/ui

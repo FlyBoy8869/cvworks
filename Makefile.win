@@ -2,11 +2,11 @@ INFO_ICON = $(HOME)\\PycharmProjects\\cvworks\\cvworks_gui\\info.png
 INFO_ICON_DST = .\\cvworks_gui
 INFO_ICON_INCLUDE = $(INFO_ICON);$(INFO_ICON_DST)
 
-OFF_ICON = $(HOME)\\PycharmProjects\\cvworks\\cvworks_gui\\ui\\off-64x64.png
+OFF_ICON = $(HOME)\\PycharmProjects\\cvworks\\cvworks_gui\\ui\\off.png
 OFF_ICON_DST = .\\cvworks_gui\\ui
 OFF_ICON_INCLUDE = $(OFF_ICON);$(OFF_ICON_DST)
 
-WORKS_ICON = $(HOME)\\PycharmProjects\\cvworks\\cvworks_gui\\ui\\works-64x64.png
+WORKS_ICON = $(HOME)\\PycharmProjects\\cvworks\\cvworks_gui\\ui\\works.png
 WORKS_ICON_DST = .\\cvworks_gui\\ui
 WORKS_ICON_INCLUDE = $(WORKS_ICON);$(WORKS_ICON_DST)
 
