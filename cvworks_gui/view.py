@@ -1,11 +1,23 @@
-from PyQt6.QtCore import QDate, Qt, pyqtSignal, QSettings, QSize, QPoint
+from PyQt6.QtCore import (
+    QDate,
+    Qt,
+    pyqtSignal,
+    QSettings,
+    QSize,
+    QPoint,
+    QByteArray,
+    QRect,
+)
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QWidget, QMessageBox
 
+from cvworks_gui import organization, application
 from cvworks_gui.styling import *
 from cvworks_gui.ui.calendar_ui import Ui_Form
 
-settings = QSettings("CharlesIndustries", "CVWorks")
+settings = QSettings(QSettings.Scope.UserScope, organization, application)
+
+TITLE_BAR_HEIGHT = 28
 
 
 class CalendarView(QWidget, Ui_Form):
@@ -17,6 +29,7 @@ class CalendarView(QWidget, Ui_Form):
         self.setWindowTitle(f"CVWorks")
 
         # hook up signals
+        # noinspection PyUnresolvedReferences
         self.show_today.connect(self._go_to_today)
 
         self.show()
@@ -32,13 +45,19 @@ class CalendarView(QWidget, Ui_Form):
                 self._show_about_dialog()
                 return
             if event.key() == Qt.Key.Key_T:
+                # noinspection PyUnresolvedReferences
                 self.show_today.emit(QDate.currentDate())
                 return
+            if event.key() == Qt.Key.Key_R:
+                self.resize(400, 428)
+                self.move(1024, 512)
+                return
+
         event.ignore()
 
     def showEvent(self, event):
-        self.move(settings.value("calendarView/position", QPoint(100, 100)))
         self.resize(settings.value("calendarView/size", QSize(400, 400)))
+        self.move(settings.value("calendarView/position", QPoint(100, 100)))
         event.accept()
 
     def _go_to_today(self, current_date: QDate):

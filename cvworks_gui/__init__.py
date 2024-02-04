@@ -1,0 +1,2 @@
+organization = "CharlesIndustries"
+application = "CVWorks"

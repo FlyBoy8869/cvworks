@@ -14,13 +14,17 @@ def _to_python_date(d: QDate):
 
 
 class CustomCalendar(QCalendarWidget):
+    FONT_WEIGHT = 1000
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self._off_indicator = QPixmap(off_icon)
         self._works_indicator = QPixmap(works_icon)
 
         if platform.system() == "Windows":
-            self.date_background_color = Qt.GlobalColor.darkGray
+            self.date_background_color = self.palette().color(
+                QPalette.ColorGroup.Normal, QPalette.ColorRole.Shadow
+            )
         else:
             self.date_background_color = self.palette().color(
                 QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
@@ -35,7 +39,7 @@ class CustomCalendar(QCalendarWidget):
                 indicator = self._off_indicator
 
             font = painter.font()
-            font.setWeight(1000)
+            font.setWeight(self.FONT_WEIGHT)
             painter.setFont(font)
             painter.setPen(Qt.GlobalColor.yellow)
             alignment = Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight

@@ -1,7 +1,9 @@
-import sys
-import cvworks_gui.view
 import platform
+import sys
+
 from PyQt6.QtWidgets import QApplication
+
+import cvworks_gui.view
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
