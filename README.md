@@ -1,6 +1,8 @@
 # CVWorks
 
-An interactive calendar indicating whether CV is working or off.
+An interactive calendar indicating whether CV is working or off.<br>
+<br>
+Just click a date and see what you get.
 
 ![Off Image](off-readme.png)
 
