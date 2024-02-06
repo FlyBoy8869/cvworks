@@ -3,6 +3,7 @@
 An interactive calendar indicating whether CV is working or off.<br>
 <br>
 Just click a date and see what you get.
+<br><br><br>
 
 ![Off Image](off-readme.png)
 
@@ -12,7 +13,7 @@ Nope, I'm off today.
 ![Works](works-readme.png)
 
 Bummer, It's my turn.
-
+<br><br><br><br>
 
 ### Screenshots:
 ![OFF](off-screenshot.png)
