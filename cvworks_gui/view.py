@@ -5,19 +5,15 @@ from PyQt6.QtCore import (
     QSettings,
     QSize,
     QPoint,
-    QByteArray,
-    QRect,
 )
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QWidget, QMessageBox
 
 from cvworks_gui import organization, application
-from cvworks_gui.styling import *
+import cvworks_gui.styling as styling
 from cvworks_gui.ui.calendar_ui import Ui_Form
 
 settings = QSettings(QSettings.Scope.UserScope, organization, application)
-
-TITLE_BAR_HEIGHT = 28
 
 
 class CalendarView(QWidget, Ui_Form):
@@ -28,7 +24,6 @@ class CalendarView(QWidget, Ui_Form):
         self.setupUi(self)
         self.setWindowTitle(f"CVWorks")
 
-        # hook up signals
         # noinspection PyUnresolvedReferences
         self.show_today.connect(self._go_to_today)
 
@@ -65,16 +60,16 @@ class CalendarView(QWidget, Ui_Form):
 
     def _show_about_dialog(self):
         text = (
-            f"{AUTHOR_HEADING}"
-            f"{AUTHOR_NAME}"
-            f"{AUTHOR_EMAIL}"
-            f"{VERSION_HEADING}"
-            f"{OPERATING_SYSTEM}"
-            f"{PROGRAM_VERSION}"
+            f"{styling.ABOUT_AUTHOR_HEADING}"
+            f"{styling.ABOUT_AUTHOR_NAME}"
+            f"{styling.ABOUT_AUTHOR_EMAIL}"
+            f"{styling.ABOUT_VERSION_HEADING}"
+            f"{styling.ABOUT_OPERATING_SYSTEM}"
+            f"{styling.ABOUT_PROGRAM_VERSION}"
         )
 
         msg_box = QMessageBox(parent=self)
-        msg_box.setIconPixmap(QPixmap(INFO_ICON))
+        msg_box.setIconPixmap(QPixmap(styling.ABOUT_INFO_ICON))
         msg_box.setWindowTitle("About CVWorks")
         msg_box.setText(text)
         msg_box.exec()

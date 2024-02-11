@@ -5,7 +5,7 @@ from PyQt6.QtCore import QDate, Qt
 from PyQt6.QtGui import QPixmap, QPalette
 from PyQt6.QtWidgets import QCalendarWidget
 
-from cvworks_gui.ui import off_icon, works_icon
+from cvworks_gui import OFF_ICON, WORKS_ICON
 from schedule import schedule
 
 
@@ -18,8 +18,8 @@ class CustomCalendar(QCalendarWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self._off_indicator = QPixmap(off_icon)
-        self._works_indicator = QPixmap(works_icon)
+        self._off_indicator = QPixmap(OFF_ICON)
+        self._works_indicator = QPixmap(WORKS_ICON)
 
         if platform.system() == "Windows":
             self.date_background_color = self.palette().color(
