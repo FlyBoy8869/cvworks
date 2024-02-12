@@ -1,4 +1,4 @@
-RESOURCES_FOLDER = /Users/charles/PycharmProjects/cvworks/cvworks_gui/resources
+RESOURCES_FOLDER = ./cvworks_gui/resources
 RESOURCES_FOLDER_DST = "./cvworks_gui/resources"
 DATA_TO_INCLUDE = --add-data=$(RESOURCES_FOLDER):$(RESOURCES_FOLDER_DST)
 
