@@ -4,10 +4,10 @@ import os
 import platform
 from version import VERSION
 
-from cvworks_gui import images_base_dir
+from cvworks_gui import IMAGES_BASE_FOLDER
 
 # About Dialog Styling
-ABOUT_INFO_ICON = os.path.join(images_base_dir, "info.png")
+ABOUT_INFO_ICON = os.path.join(IMAGES_BASE_FOLDER, "info.png")
 
 ABOUT_INFO_DIALOG_HEADING_WEIGHT = 500
 ABOUT_INFO_DIALOG_TEXT_SIZE = 10
