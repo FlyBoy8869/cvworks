@@ -30,6 +30,46 @@
      </property>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QToolButton" name="tb_about">
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+	border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>About</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="tb_today">
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+	border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Today</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="tb_reset">
+       <property name="styleSheet">
+        <string notr="true">QToolButton {
+	border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Reset</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>

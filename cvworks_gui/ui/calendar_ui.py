@@ -22,6 +22,27 @@ class Ui_Form(object):
         self.calendarWidget.setDateEditEnabled(False)
         self.calendarWidget.setObjectName("calendarWidget")
         self.verticalLayout.addWidget(self.calendarWidget)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.tb_about = QtWidgets.QToolButton(parent=Form)
+        self.tb_about.setStyleSheet("QToolButton {\n"
+"    border: none;\n"
+"}")
+        self.tb_about.setObjectName("tb_about")
+        self.horizontalLayout.addWidget(self.tb_about)
+        self.tb_today = QtWidgets.QToolButton(parent=Form)
+        self.tb_today.setStyleSheet("QToolButton {\n"
+"    border: none;\n"
+"}")
+        self.tb_today.setObjectName("tb_today")
+        self.horizontalLayout.addWidget(self.tb_today)
+        self.tb_reset = QtWidgets.QToolButton(parent=Form)
+        self.tb_reset.setStyleSheet("QToolButton {\n"
+"    border: none;\n"
+"}")
+        self.tb_reset.setObjectName("tb_reset")
+        self.horizontalLayout.addWidget(self.tb_reset)
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -29,4 +50,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        self.tb_about.setText(_translate("Form", "About"))
+        self.tb_today.setText(_translate("Form", "Today"))
+        self.tb_reset.setText(_translate("Form", "Reset"))
 from cvworks_gui.ui.customcalendar import CustomCalendar

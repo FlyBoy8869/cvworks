@@ -2,18 +2,15 @@ from PyQt6.QtCore import (
     QDate,
     Qt,
     pyqtSignal,
-    QSettings,
     QSize,
     QPoint,
 )
-from PyQt6.QtGui import QPixmap
-from PyQt6.QtWidgets import QWidget, QMessageBox
+from PyQt6.QtGui import QPixmap, QKeyEvent
+from PyQt6.QtWidgets import QWidget, QMessageBox, QApplication
 
-from cvworks_gui import organization, application
 import cvworks_gui.styling as styling
 from cvworks_gui.ui.calendar_ui import Ui_Form
-
-settings = QSettings(QSettings.Scope.UserScope, organization, application)
+import settings
 
 
 class CalendarView(QWidget, Ui_Form):
@@ -27,11 +24,29 @@ class CalendarView(QWidget, Ui_Form):
         # noinspection PyUnresolvedReferences
         self.show_today.connect(self._go_to_today)
 
+        self.tb_about.clicked.connect(
+            lambda _: self.keyReleaseEvent(
+                self.create_ctrl_key_release_event(Qt.Key.Key_A)
+            )
+        )
+
+        self.tb_today.clicked.connect(
+            lambda _: self.keyReleaseEvent(
+                self.create_ctrl_key_release_event(Qt.Key.Key_T)
+            )
+        )
+
+        self.tb_reset.clicked.connect(
+            lambda _: self.keyReleaseEvent(
+                self.create_ctrl_key_release_event(Qt.Key.Key_R)
+            )
+        )
+
         self.show()
 
     def closeEvent(self, event):
-        settings.setValue("calendarView/size", self.size())
-        settings.setValue("calendarView/position", self.pos())
+        settings.settings.setValue("calendarView/size", self.size())
+        settings.settings.setValue("calendarView/position", self.pos())
         event.accept()
 
     def keyReleaseEvent(self, event):
@@ -44,15 +59,19 @@ class CalendarView(QWidget, Ui_Form):
                 self.show_today.emit(QDate.currentDate())
                 return
             if event.key() == Qt.Key.Key_R:
+                screen = QApplication.screenAt(QPoint(self.x(), self.y()))
                 self.resize(400, 428)
-                self.move(1024, 512)
+                self.move(
+                    int((screen.geometry().width() - self.geometry().width()) / 2),
+                    int((screen.geometry().height() - self.geometry().height()) / 2),
+                )
                 return
 
         event.ignore()
 
     def showEvent(self, event):
-        self.resize(settings.value("calendarView/size", QSize(400, 400)))
-        self.move(settings.value("calendarView/position", QPoint(100, 100)))
+        self.resize(settings.settings.value("calendarView/size", QSize(400, 400)))
+        self.move(settings.settings.value("calendarView/position", QPoint(100, 100)))
         event.accept()
 
     def _go_to_today(self, current_date: QDate):
@@ -73,3 +92,9 @@ class CalendarView(QWidget, Ui_Form):
         msg_box.setWindowTitle("About CVWorks")
         msg_box.setText(text)
         msg_box.exec()
+
+    @staticmethod
+    def create_ctrl_key_release_event(key):
+        return QKeyEvent(
+            QKeyEvent.Type.KeyRelease, key, Qt.KeyboardModifier.ControlModifier
+        )
