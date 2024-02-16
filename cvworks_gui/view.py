@@ -16,7 +16,7 @@ import settings
 class CalendarView(QWidget, Ui_Form):
     show_today: pyqtSignal = pyqtSignal(QDate)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle(f"CVWorks")
@@ -44,12 +44,12 @@ class CalendarView(QWidget, Ui_Form):
 
         self.show()
 
-    def closeEvent(self, event):
+    def closeEvent(self, event) -> None:
         settings.settings.setValue("calendarView/size", self.size())
         settings.settings.setValue("calendarView/position", self.pos())
         event.accept()
 
-    def keyReleaseEvent(self, event):
+    def keyReleaseEvent(self, event) -> None:
         if event.modifiers() & Qt.KeyboardModifier.ControlModifier:
             if event.key() == Qt.Key.Key_A:
                 self._show_about_dialog()
@@ -59,25 +59,28 @@ class CalendarView(QWidget, Ui_Form):
                 self.show_today.emit(QDate.currentDate())
                 return
             if event.key() == Qt.Key.Key_R:
-                screen = QApplication.screenAt(QPoint(self.x(), self.y()))
-                self.resize(400, 428)
-                self.move(
-                    int((screen.geometry().width() - self.geometry().width()) / 2),
-                    int((screen.geometry().height() - self.geometry().height()) / 2),
-                )
+                self._center_on_screen()
                 return
 
         event.ignore()
 
-    def showEvent(self, event):
+    def showEvent(self, event) -> None:
         self.resize(settings.settings.value("calendarView/size", QSize(400, 400)))
         self.move(settings.settings.value("calendarView/position", QPoint(100, 100)))
         event.accept()
 
-    def _go_to_today(self, current_date: QDate):
+    def _center_on_screen(self) -> None:
+        screen = QApplication.screenAt(QPoint(self.x(), self.y()))
+        self.resize(400, 428)
+        self.move(
+            int((screen.geometry().width() - self.geometry().width()) / 2),
+            int((screen.geometry().height() - self.geometry().height()) / 2),
+        )
+
+    def _go_to_today(self, current_date: QDate) -> None:
         self.calendarWidget.setSelectedDate(current_date)
 
-    def _show_about_dialog(self):
+    def _show_about_dialog(self) -> None:
         text = (
             f"{styling.ABOUT_AUTHOR_HEADING}"
             f"{styling.ABOUT_AUTHOR_NAME}"
@@ -94,7 +97,7 @@ class CalendarView(QWidget, Ui_Form):
         msg_box.exec()
 
     @staticmethod
-    def create_ctrl_key_release_event(key):
+    def create_ctrl_key_release_event(key) -> QKeyEvent:
         return QKeyEvent(
             QKeyEvent.Type.KeyRelease, key, Qt.KeyboardModifier.ControlModifier
         )

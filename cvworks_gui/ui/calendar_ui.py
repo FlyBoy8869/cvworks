@@ -25,21 +25,15 @@ class Ui_Form(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.tb_about = QtWidgets.QToolButton(parent=Form)
-        self.tb_about.setStyleSheet("QToolButton {\n"
-"    border: none;\n"
-"}")
+        self.tb_about.setStyleSheet("")
         self.tb_about.setObjectName("tb_about")
         self.horizontalLayout.addWidget(self.tb_about)
         self.tb_today = QtWidgets.QToolButton(parent=Form)
-        self.tb_today.setStyleSheet("QToolButton {\n"
-"    border: none;\n"
-"}")
+        self.tb_today.setStyleSheet("")
         self.tb_today.setObjectName("tb_today")
         self.horizontalLayout.addWidget(self.tb_today)
         self.tb_reset = QtWidgets.QToolButton(parent=Form)
-        self.tb_reset.setStyleSheet("QToolButton {\n"
-"    border: none;\n"
-"}")
+        self.tb_reset.setStyleSheet("")
         self.tb_reset.setObjectName("tb_reset")
         self.horizontalLayout.addWidget(self.tb_reset)
         self.verticalLayout.addLayout(self.horizontalLayout)
