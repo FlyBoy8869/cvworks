@@ -48,6 +48,7 @@ class CalendarView(QWidget, Ui_Form):
     def closeEvent(self, event) -> None:
         settings.settings.setValue("calendarView/size", self.size())
         settings.settings.setValue("calendarView/position", self.pos())
+        settings.settings.setValue("calendarView/viewMode", self.calendarWidget.mode)
         event.accept()
 
     def keyReleaseEvent(self, event) -> None:
@@ -77,6 +78,9 @@ class CalendarView(QWidget, Ui_Form):
     def showEvent(self, event) -> None:
         self.resize(settings.settings.value("calendarView/size", QSize(400, 428)))
         self.move(settings.settings.value("calendarView/position", QPoint(100, 100)))
+        self.calendarWidget.mode = settings.settings.value(
+            "calendarView/viewMode", CustomCalendarViewMode.Graphical
+        )
         event.accept()
 
     def _center_on_screen(self) -> None:
