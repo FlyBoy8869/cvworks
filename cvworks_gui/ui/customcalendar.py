@@ -1,24 +1,44 @@
 import datetime
 import platform
+from enum import Enum
 
 import darkdetect
-from PyQt6.QtCore import QDate, Qt
-from PyQt6.QtGui import QPixmap, QPalette
+from PyQt6.QtCore import QDate, Qt, QRect
+from PyQt6.QtGui import QPixmap, QPalette, QFont, QFontMetrics
 from PyQt6.QtWidgets import QCalendarWidget
 
 from cvworks_gui import OFF_ICON, WORKS_ICON
 from schedule import schedule
 
 
-class CustomCalendar(QCalendarWidget):
-    FONT_WEIGHT = 1000
+class CustomCalendarViewMode(Enum):
+    Graphical = 1
+    Text = 2
 
+
+class CustomCalendar(QCalendarWidget):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
         self._off_indicator = QPixmap(OFF_ICON)
         self._works_indicator = QPixmap(WORKS_ICON)
+        self._mode = CustomCalendarViewMode.Graphical
+
+    @property
+    def mode(self) -> CustomCalendarViewMode:
+        return self._mode
+
+    @mode.setter
+    def mode(self, mode: CustomCalendarViewMode) -> None:
+        self._mode = mode
+        self.updateCells()
 
     def paintCell(self, painter, rect, date: QDate) -> None:
+        if self.mode == CustomCalendarViewMode.Graphical:
+            self._do_graphical_stuff(painter, rect, date)
+        else:
+            self._do_text_stuff(painter, rect, date)
+
+    def _do_graphical_stuff(self, painter, rect, date):
         if date == self.selectedDate():
             if darkdetect.theme() == "Dark":
                 selected_date_pen_color = Qt.GlobalColor.white
@@ -45,26 +65,53 @@ class CustomCalendar(QCalendarWidget):
                 selected_date_pen_color = Qt.GlobalColor.red
 
             font = painter.font()
-            font.setWeight(self.FONT_WEIGHT)
+            font.setWeight(QFont.Weight.Black)
             painter.setFont(font)
             painter.setPen(selected_date_pen_color)
             painter.fillRect(rect, date_background_color)
-            painter.drawPixmap(rect, self._get_indicator(date))
+            painter.drawPixmap(rect, self._get_indicator(date)[1])
             painter.drawText(
                 rect,
                 Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight,
                 f"{date.day()}",
             )
             return
-
         super().paintCell(painter, rect, date)
 
-    def _get_indicator(self, date) -> QPixmap:
+    def _do_text_stuff(self, painter, rect, date):
+        pen_color = (
+            Qt.GlobalColor.yellow
+            if darkdetect.theme() == "Dark"
+            else Qt.GlobalColor.black
+        )
+        painter.setPen(pen_color)
+        super().paintCell(painter, rect, date)
+
+        font = painter.font()
+        fm = QFontMetrics(font)
+        font.setWeight(QFont.Weight.Thin)
+
+        painter.setFont(font)
+        new_rect = QRect(
+            rect.x(),
+            rect.y(),
+            rect.width(),
+            int(rect.height() / 2) + (fm.height() + fm.descent() + 3),
+        )
+
+        text_indicator = self._get_indicator(date)[0]
+        painter.drawText(
+            new_rect,
+            Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignHCenter,
+            text_indicator,
+        )
+
+    def _get_indicator(self, date) -> tuple[str, QPixmap]:
         working = schedule.working_this_day(self._to_python_date(date))
         if working:
-            return self._works_indicator
+            return "Working", self._works_indicator
 
-        return self._off_indicator
+        return "Off", self._off_indicator
 
     @staticmethod
     def _to_python_date(d: QDate) -> datetime.date:

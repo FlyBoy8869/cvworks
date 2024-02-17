@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import QWidget, QMessageBox, QApplication
 
 import cvworks_gui.styling as styling
 from cvworks_gui.ui.calendar_ui import Ui_Form
+from cvworks_gui.ui.customcalendar import CustomCalendarViewMode
 import settings
 
 
@@ -30,15 +31,15 @@ class CalendarView(QWidget, Ui_Form):
             )
         )
 
-        self.tb_today.clicked.connect(
-            lambda _: self.keyReleaseEvent(
-                self.create_ctrl_key_release_event(Qt.Key.Key_T)
-            )
-        )
-
         self.tb_reset.clicked.connect(
             lambda _: self.keyReleaseEvent(
                 self.create_ctrl_key_release_event(Qt.Key.Key_R)
+            )
+        )
+
+        self.tb_today.clicked.connect(
+            lambda _: self.keyReleaseEvent(
+                self.create_ctrl_key_release_event(Qt.Key.Key_T)
             )
         )
 
@@ -54,24 +55,33 @@ class CalendarView(QWidget, Ui_Form):
             if event.key() == Qt.Key.Key_A:
                 self._show_about_dialog()
                 return
+            if event.key() == Qt.Key.Key_M:
+                self.calendarWidget.mode = (
+                    CustomCalendarViewMode.Graphical
+                    if self.calendarWidget.mode == CustomCalendarViewMode.Text
+                    else CustomCalendarViewMode.Text
+                )
+            if event.key() == Qt.Key.Key_R:
+                self._center_on_screen()
+                return
             if event.key() == Qt.Key.Key_T:
                 # noinspection PyUnresolvedReferences
                 self.show_today.emit(QDate.currentDate())
                 return
-            if event.key() == Qt.Key.Key_R:
-                self._center_on_screen()
+            if event.key() == Qt.Key.Key_D:
+                print(f"geometry: {self.geometry()}")
                 return
 
         event.ignore()
 
     def showEvent(self, event) -> None:
-        self.resize(settings.settings.value("calendarView/size", QSize(400, 400)))
+        self.resize(settings.settings.value("calendarView/size", QSize(400, 428)))
         self.move(settings.settings.value("calendarView/position", QPoint(100, 100)))
         event.accept()
 
     def _center_on_screen(self) -> None:
         screen = QApplication.screenAt(QPoint(self.x(), self.y()))
-        self.resize(400, 428)
+        self.resize(500, 500)
         self.move(
             int((screen.geometry().width() - self.geometry().width()) / 2),
             int((screen.geometry().height() - self.geometry().height()) / 2),
