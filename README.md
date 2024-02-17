@@ -10,10 +10,11 @@ Just click a date and see what you get.
 - CTRL-M - Switch between graphical and textual modes
 - CTRL-R - Reset screen position and dimensions
 - CTRL-T - Jump to today's date
-
+<br><br> 
 ### Screenshots:
+<br>
 
-#### Graphical Mode
+#### - Graphical Mode
 
 ![Off Image](readme-off.png)
 
@@ -27,6 +28,6 @@ Bumber, It's my turn.
 
 ![WORKS](screenshot-works.png)
 
-#### Text Mode
+#### - Text Mode
 
 ![Text Mode](screenshot-text-mode.png)
