@@ -39,44 +39,49 @@ class CustomCalendar(QCalendarWidget):
             self._do_text_stuff(painter, rect, date)
 
     def _do_graphical_stuff(self, painter, rect, date):
-        if date == self.selectedDate():
-            if darkdetect.theme() == "Dark":
-                selected_date_pen_color = Qt.GlobalColor.white
-                if platform.system() == "Windows":
-                    date_background_color = self.palette().color(
-                        QPalette.ColorGroup.Normal, QPalette.ColorRole.Shadow
-                    )
-                else:
-                    date_background_color = self.palette().color(
-                        QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
-                    )
+        if darkdetect.theme() == "Dark":
+            selected_date_pen_color = Qt.GlobalColor.white
+            if platform.system() == "Windows":
+                date_background_color = self.palette().color(
+                    QPalette.ColorGroup.Normal, QPalette.ColorRole.Shadow
+                )
             else:
-                selected_date_pen_color = Qt.GlobalColor.black
-                if platform.system() == "Windows":
-                    date_background_color = self.palette().color(
-                        QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
-                    )
-                else:
-                    date_background_color = self.palette().color(
-                        QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
-                    )
+                date_background_color = self.palette().color(
+                    QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
+                )
+        else:
+            selected_date_pen_color = Qt.GlobalColor.black
+            if platform.system() == "Windows":
+                date_background_color = self.palette().color(
+                    QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
+                )
+            else:
+                date_background_color = self.palette().color(
+                    QPalette.ColorGroup.Normal, QPalette.ColorRole.Base
+                )
 
-            if date.dayOfWeek() in (6, 7):
-                selected_date_pen_color = Qt.GlobalColor.red
+        if date.dayOfWeek() in (6, 7):
+            selected_date_pen_color = Qt.GlobalColor.red
 
-            font = painter.font()
-            font.setWeight(QFont.Weight.Black)
-            painter.setFont(font)
-            painter.setPen(selected_date_pen_color)
-            painter.fillRect(rect, date_background_color)
-            painter.drawPixmap(rect, self._get_indicator(date)[1])
-            painter.drawText(
-                rect,
-                Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight,
-                f"{date.day()}",
-            )
-            return
-        super().paintCell(painter, rect, date)
+        font = painter.font()
+        font.setWeight(QFont.Weight.Black)
+        painter.setFont(font)
+        painter.setPen(selected_date_pen_color)
+        painter.fillRect(rect, date_background_color)
+
+        rect.setWidth(rect.width() - 30)
+        rect.setHeight(rect.height() - 30)
+        painter.drawPixmap(
+            rect,
+            self._get_indicator(date)[1],
+        )
+
+        painter.drawText(
+            rect,
+            Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight,
+            f"{date.day()}",
+        )
+        return
 
     def _do_text_stuff(self, painter, rect, date):
         pen_color = (
