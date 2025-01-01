@@ -15,4 +15,5 @@ install:
 release: update-version app install
 
 setup-mac:
+	# run this only after creating a virtualenv and activating it
 	python -m pip install -r requirements.txt

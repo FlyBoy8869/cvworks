@@ -3,9 +3,9 @@ import platform
 from enum import Enum
 
 import darkdetect
-from PyQt6.QtCore import QDate, Qt, QRect
-from PyQt6.QtGui import QPixmap, QPalette, QFont, QFontMetrics
-from PyQt6.QtWidgets import QCalendarWidget
+from PySide6.QtCore import QDate, Qt, QRect
+from PySide6.QtGui import QPixmap, QPalette, QFont, QFontMetrics
+from PySide6.QtWidgets import QCalendarWidget
 
 from cvworks_gui import OFF_ICON, WORKS_ICON
 from schedule import schedule

@@ -1,12 +1,12 @@
-from PyQt6.QtCore import (
+from PySide6.QtCore import (
     QDate,
     Qt,
-    pyqtSignal,
+    Signal,
     QSize,
     QPoint,
 )
-from PyQt6.QtGui import QPixmap, QKeyEvent
-from PyQt6.QtWidgets import QWidget, QMessageBox, QApplication
+from PySide6.QtGui import QPixmap, QKeyEvent
+from PySide6.QtWidgets import QWidget, QMessageBox, QApplication
 
 import cvworks_gui.styling as styling
 from cvworks_gui.ui.calendar_ui import Ui_Form
@@ -15,7 +15,7 @@ import settings
 
 
 class CalendarView(QWidget, Ui_Form):
-    show_today: pyqtSignal = pyqtSignal(QDate)
+    show_today: Signal = Signal(QDate)
 
     def __init__(self) -> None:
         super().__init__()
@@ -43,11 +43,12 @@ class CalendarView(QWidget, Ui_Form):
             )
         )
 
-        self.show()
+        # used with qtmodern window wrapper
+        self._self = None
 
     def closeEvent(self, event) -> None:
-        settings.settings.setValue("calendarView/size", self.size())
-        settings.settings.setValue("calendarView/position", self.pos())
+        settings.settings.setValue("calendarView/size", self._self.size())
+        settings.settings.setValue("calendarView/position", self._self.pos())
         settings.settings.setValue("calendarView/viewMode", self.calendarWidget.mode)
         event.accept()
 
@@ -75,9 +76,12 @@ class CalendarView(QWidget, Ui_Form):
 
         event.ignore()
 
+    def set_qtmodern_window_reference(self, window_reference):
+        self._self = window_reference
+
     def showEvent(self, event) -> None:
-        self.resize(settings.settings.value("calendarView/size", QSize(400, 428)))
-        self.move(settings.settings.value("calendarView/position", QPoint(100, 100)))
+        self._self.resize(settings.settings.value("calendarView/size", QSize(400, 428)))
+        self._self.move(settings.settings.value("calendarView/position", QPoint(100, 100)))
         self.calendarWidget.mode = settings.settings.value(
             "calendarView/viewMode", CustomCalendarViewMode.Graphical
         )
@@ -85,10 +89,10 @@ class CalendarView(QWidget, Ui_Form):
 
     def _center_on_screen(self) -> None:
         screen = QApplication.screenAt(QPoint(self.x(), self.y()))
-        self.resize(500, 500)
-        self.move(
-            int((screen.geometry().width() - self.geometry().width()) / 2),
-            int((screen.geometry().height() - self.geometry().height()) / 2),
+        self._self.resize(500, 500)
+        self._self.move(
+            int((screen.geometry().width() - self._self.geometry().width()) / 2),
+            int((screen.geometry().height() - self._self.geometry().height()) / 2),
         )
 
     def _go_to_today(self, current_date: QDate) -> None:
