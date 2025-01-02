@@ -26,6 +26,12 @@ if __name__ == "__main__":
     # qtmodern's window
     window.set_qtmodern_window_reference(modern_window)
 
+    # not sure if qtmodern is causing the problem,
+    # but this is needed on MS Windows in order for
+    # keyReleaseEvent to work without having to
+    # click in the CalendarWidget first
+    window.calendarWidget.setFocus()
+
     modern_window.show()
 
     sys.exit(app.exec())
