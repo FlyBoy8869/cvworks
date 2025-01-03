@@ -1,7 +1,6 @@
 black
 PySide6
 python-dateutil
-#pyqtdarktheme~=2.1.0
 pyinstaller
 darkdetect
 
