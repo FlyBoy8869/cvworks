@@ -5,6 +5,9 @@ dist
 cvworks.spec
 /my_scratchies/
 
+.idea/cvworks.iml
+.idea/misc.xml
+
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm
 
