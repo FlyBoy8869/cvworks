@@ -6,9 +6,9 @@ app:
 	pyinstaller app.py --noconfirm --windowed $(DATA_TO_INCLUDE) --name cvworks
 
 install:
-	IF EXIST "$(HOME)\cvworks" (rmdir /S /Q $(HOME)\cvworks)
-	mkdir $(HOME)\cvworks
-	xcopy .\dist\cvworks $(HOME)\cvworks /E /H /C /I
+	IF EXIST "$(HOMEPATH)\cvworks" (rmdir /S /Q $(HOMEPATH)\cvworks)
+	mkdir $(HOMEPATH)\cvworks
+	xcopy .\dist\cvworks $(HOMEPATH)\cvworks /E /H /C /I
 	python.exe buildscripts/create_windows_shortcut.py
 
 release: app install
