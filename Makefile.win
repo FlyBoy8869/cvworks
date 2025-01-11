@@ -3,15 +3,15 @@ RESOURCES_FOLDER_DST = "./cvworks_gui/resources"
 DATA_TO_INCLUDE = --add-data=$(RESOURCES_FOLDER);$(RESOURCES_FOLDER_DST)
 
 app:
-	pyinstaller app.py --noconfirm --windowed $(DATA_TO_INCLUDE) --name cvworks
+	pyinstaller --noconfirm --windowed --name cvworks $(DATA_TO_INCLUDE) app.py
 
-install:
+win-install:
 	IF EXIST "$(HOMEPATH)\cvworks" (rmdir /S /Q $(HOMEPATH)\cvworks)
 	mkdir $(HOMEPATH)\cvworks
 	xcopy .\dist\cvworks $(HOMEPATH)\cvworks /E /H /C /I
 	python.exe buildscripts/create_windows_shortcut.py
 
-release: app install
+win-release: app install
 
-setup:
+win-setup:
 	python.exe -m pip install -r win_requirements.txt

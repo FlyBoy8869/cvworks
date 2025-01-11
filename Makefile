@@ -14,6 +14,18 @@ install:
 
 release: update-version app install
 
-setup-mac:
+setup:
 	# run this only after creating a virtualenv and activating it
 	python -m pip install -r requirements.txt
+
+# MS Windows targets
+win-install:
+	IF EXIST "$(HOMEPATH)\cvworks" (rmdir /S /Q $(HOMEPATH)\cvworks)
+	mkdir $(HOMEPATH)\cvworks
+	xcopy .\dist\cvworks $(HOMEPATH)\cvworks /E /H /C /I
+	python.exe buildscripts/create_windows_shortcut.py
+
+win-release: app install
+
+win-setup:
+	python.exe -m pip install -r win_requirements.txt
