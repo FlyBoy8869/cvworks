@@ -9,5 +9,5 @@ version = (
 
 m_text = f"VERSION = '{version}'\n"
 
-with open("version.py", "wt", encoding="utf-8") as outfile:
+with open("_version.py", "wt", encoding="utf-8") as outfile:
     outfile.write(m_text)

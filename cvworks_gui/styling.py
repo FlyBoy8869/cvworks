@@ -2,7 +2,7 @@
 
 import os
 import platform
-from version import VERSION
+from _version import VERSION
 
 from cvworks_gui import IMAGES_BASE_FOLDER
 
