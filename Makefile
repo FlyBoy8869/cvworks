@@ -25,7 +25,7 @@ win-install:
 	xcopy .\dist\cvworks $(HOMEPATH)\cvworks /E /H /C /I
 	python.exe buildscripts/create_windows_shortcut.py
 
-win-release: app install
+win-release: app win-install
 
 win-setup:
 	python.exe -m pip install -r win_requirements.txt
