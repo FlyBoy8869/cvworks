@@ -1,8 +1,0 @@
-black~=23.12.1
-PyQt6~=6.6.1
-python-dateutil~=2.8.2
-pyqtdarktheme~=2.1.0
-pyinstaller~=6.11.1
-darkdetect~=0.7.1
-pywin32~=306
-winshell~=0.6

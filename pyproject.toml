@@ -1,0 +1,20 @@
+[project]
+name = "cvworks"
+version = "0.1.0"
+description = "App to know when Christina is working or not."
+readme = "README.md"
+requires-python = ">=3.12.8"
+dependencies = [
+    "darkdetect>=0.8.0",
+    "pyside6>=6.8.1.1",
+    "python-dateutil>=2.9.0.post0",
+    "pywin32>=308 ; sys_platform == 'win32'",
+    "qtmodern>=0.2.0",
+    "winshell>=0.6 ; sys_platform == 'win32'",
+]
+
+[dependency-groups]
+dev = [
+    "black>=24.10.0",
+    "pyinstaller>=6.11.1",
+]

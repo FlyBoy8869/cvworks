@@ -1,6 +1,0 @@
-black
-PySide6
-python-dateutil
-pyinstaller
-darkdetect
-qtmodern
