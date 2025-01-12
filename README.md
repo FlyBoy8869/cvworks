@@ -16,17 +16,12 @@ Just click a date and see what you get.
 
 #### - Graphical Mode
 
-![Off Image](readme-off.png)
+![Off Image](screenshot-graphics-mode.png)
 
-Nope, I'm off today.
+![Works](readme-works.png) I'm working.
 
-![OFF](screenshot-off.png)
-
-![Works](readme-works.png)
-
-Bumber, It's my turn.
-
-![WORKS](screenshot-works.png)
+![Off](readme-off.png) Nope, not today.
+<br><br>
 
 #### - Text Mode
 
