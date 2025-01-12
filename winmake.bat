@@ -1,1 +1,0 @@
-make -f Makefile.win %1
