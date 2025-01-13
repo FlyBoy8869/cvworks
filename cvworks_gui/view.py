@@ -106,6 +106,7 @@ class CalendarView(QWidget, Ui_Form):
             f"{styling.ABOUT_VERSION_HEADING}"
             f"{styling.ABOUT_OPERATING_SYSTEM}"
             f"{styling.ABOUT_PROGRAM_VERSION}"
+            f"{styling.ABOUT_PROGRAM_BUILD}"
         )
 
         msg_box = QMessageBox(parent=self)
