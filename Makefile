@@ -3,10 +3,11 @@ RESOURCES_FOLDER_DST = "./cvworks_gui/resources"
 DATA_TO_INCLUDE = --add-data=$(RESOURCES_FOLDER):$(RESOURCES_FOLDER_DST)
 
 app:
-	pyinstaller --noconfirm --windowed --name cvworks $(DATA_TO_INCLUDE) app.py
+	uv run pyinstaller --noconfirm --windowed --name cvworks $(DATA_TO_INCLUDE) app.py
 
 update-version:
 	python buildscripts/buildversion.py
+	python buildscripts/update-pyproject-toml-version.py
 
 install:
 	# command must be structured this way
@@ -15,8 +16,8 @@ install:
 release: update-version app install
 
 setup:
-	# run this only after creating a virtualenv and activating it
-	python -m pip install -r requirements.txt
+	uv init
+	uv sync --all-groups
 
 # MS Windows targets
 win-install:
@@ -28,4 +29,5 @@ win-install:
 win-release: app win-install
 
 win-setup:
-	python.exe -m pip install -r win_requirements.txt
+	uv init
+	uv sync --all-groups
