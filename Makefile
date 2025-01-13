@@ -16,7 +16,6 @@ install:
 release: update-version app install
 
 setup:
-	uv init
 	uv sync --all-groups
 
 # MS Windows targets
@@ -29,5 +28,4 @@ win-install:
 win-release: app win-install
 
 win-setup:
-	uv init
 	uv sync --all-groups
