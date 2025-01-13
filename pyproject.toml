@@ -1,6 +1,7 @@
 [project]
 name = "cvworks"
 version = "2025.01.13"
+build_build = "17.37.45"
 description = "App to know when Christina is working or not."
 readme = "README.md"
 requires-python = ">=3.12.8"
