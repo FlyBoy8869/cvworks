@@ -2,7 +2,7 @@
 
 import os
 import platform
-from _version import VERSION
+from _version import version
 
 from cvworks_gui import IMAGES_BASE_FOLDER
 
@@ -29,5 +29,5 @@ ABOUT_OPERATING_SYSTEM = (
 )
 ABOUT_PROGRAM_VERSION = (
     f"<span style='font-weight: {ABOUT_INFO_DIALOG_TEXT_FONT_WEIGHT}; "
-    f"font-size: {ABOUT_INFO_DIALOG_TEXT_SIZE}px;'>{VERSION}</span></p>"
+    f"font-size: {ABOUT_INFO_DIALOG_TEXT_SIZE}px;'>{version}</span></p>"
 )
