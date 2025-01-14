@@ -1,8 +1,8 @@
 [project]
 name = "cvworks"
 version = "2025.01"
-build_version = "14065350"
-description = "App to know when Christina is working or not."
+build_version = "14101545"
+description = "App to know if Christina is working or not."
 readme = "README.md"
 requires-python = ">=3.12.8"
 dependencies = [

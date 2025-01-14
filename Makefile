@@ -6,8 +6,8 @@ app:
 	uv run pyinstaller --noconfirm --windowed --name cvworks $(DATA_TO_INCLUDE) app.py
 
 update-version:
-	python buildscripts/buildversion.py
-	python buildscripts/update-pyproject-toml-version.py
+	uv run buildscripts/buildversion.py
+	uv run buildscripts/update-pyproject-toml-version.py
 
 install:
 	# command must be structured this way
@@ -23,7 +23,7 @@ win-install:
 	IF EXIST "$(HOMEPATH)\cvworks" (rmdir /S /Q $(HOMEPATH)\cvworks)
 	mkdir $(HOMEPATH)\cvworks
 	xcopy .\dist\cvworks $(HOMEPATH)\cvworks /E /H /C /I
-	python.exe buildscripts/create_windows_shortcut.py
+	uv run buildscripts/create_windows_shortcut.py
 
 win-release: app win-install
 
