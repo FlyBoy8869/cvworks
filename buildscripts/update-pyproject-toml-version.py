@@ -1,3 +1,6 @@
+PYPROJECTTOML_VERSION_PREFIX = "version"
+PYPROJECTTOML_BUILD_PREFIX = "build_version"
+
 with open("_version.py", mode="rt") as input_file:
     version_info = input_file.readline().split("=")[1].strip()
     version_info.replace('"', "")
@@ -8,9 +11,9 @@ pyproject_toml_contents = []
 with open("pyproject.toml", mode="rt") as input_file:
     for line in input_file:
         if line.startswith("version"):
-            pyproject_toml_contents.append(f'version = {version_info}\n')
+            pyproject_toml_contents.append(f'{PYPROJECTTOML_VERSION_PREFIX} = {version_info}\n')
         elif line.startswith("build_version"):
-            pyproject_toml_contents.append(f'build_build = {build_info}\n')
+            pyproject_toml_contents.append(f'{PYPROJECTTOML_BUILD_PREFIX} = {build_info}\n')
         else:
             pyproject_toml_contents.append(line)
 
