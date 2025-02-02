@@ -1,15 +1,20 @@
+import os.path
 import sys
 
 import darkdetect
 import qtmodern.styles
 import qtmodern.windows
+from PySide6.QtGui import QIcon
 
 from PySide6.QtWidgets import QApplication
 
 import cvworks_gui.view
 
+root_dir = os.path.dirname(__file__)
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(os.path.join(root_dir, "icon.ico")))
     window = cvworks_gui.view.CalendarView()
 
     if darkdetect.isDark():
