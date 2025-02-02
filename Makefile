@@ -22,7 +22,7 @@ setup:
 
 # MS Windows targets
 win-app:
-	uv run pyinstaller --noconfirm --windowed --name cvworks --icon $(WINDOWS_APP_ICON) $(DATA_TO_INCLUDE) app.py
+	uv run pyinstaller --noconfirm --windowed --name cvworks --icon $(WINDOWS_APP_ICON) --add-data=$(WINDOWS_APP_ICON);"." $(DATA_TO_INCLUDE) app.py
 
 win-install:
 	IF EXIST "$(HOMEPATH)\cvworks" (rmdir /S /Q $(HOMEPATH)\cvworks)

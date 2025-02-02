@@ -12,6 +12,13 @@ import cvworks_gui.view
 
 root_dir = os.path.dirname(__file__)
 
+try:
+    from ctypes import windll
+    my_app_id = 'com.charlescognato.cvworks'
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_app_id)
+except ImportError:
+    pass
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(os.path.join(root_dir, "icon.ico")))
