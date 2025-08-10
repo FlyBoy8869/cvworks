@@ -6,6 +6,7 @@ build
 dist
 my_scratchies
 cvworks.spec
+__pycache__
 
 ### macOS ###
 # General
