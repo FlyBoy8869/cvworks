@@ -4,7 +4,7 @@ version = "2025.02"
 build_version = "02164128"
 description = "App to know if Christina is working or not."
 readme = "README.md"
-requires-python = ">=3.12.8"
+requires-python = ">=3.13.6"
 dependencies = [
     "darkdetect>=0.8.0",
     "pyside6>=6.8.1.1",
